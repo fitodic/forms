@@ -7,7 +7,14 @@
     <div>
         <form action="" method="post">
             {% csrf_token %}
-            {{ form }}
+            <div>
+                {{ question_form }}
+            </div>
+            <div>
+                <ul>
+                    {{ choice_form.as_ul }}
+                </ul>
+            </div>
             <input type="submit" value="Save">
         </form>
     </div>

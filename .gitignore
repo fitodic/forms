@@ -77,3 +77,4 @@ ENV/
 
 # Project
 *.sqlite3
+/static/*

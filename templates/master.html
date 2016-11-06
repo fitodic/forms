@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        {% block title %}
+            Forms
+        {% endblock title %}
+    </title>
+</head>
+<body>
+    {% block user_info %}
+        <div>
+            {% if request.user.is_anonymous %}
+                <p><a href="{% url 'accounts:login' %}">Login</a></p>
+            {% else %}
+                <p><a href="{% url 'accounts:logout' %}">Logout - {{ request.user.get_username }}</a></p>
+            {% endif %}
+        </div>
+    {% endblock user_info %}
+
+    {% block body %}
+
+    {% endblock body %}
+</body>
+</html>

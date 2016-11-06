@@ -2,6 +2,13 @@
 
 {% block body %}
     <div>
-        <h1>index.html</h1>
+        <div>
+            <h1>What would you like to do?</h1>
+        </div>
+        <div>
+            <li>
+                <ul><a href="{% url 'polls:initialize' %}">Start a new poll</a></ul>
+            </li>
+        </div>
     </div>
 {% endblock body %}

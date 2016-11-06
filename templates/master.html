@@ -13,7 +13,7 @@
             {% if request.user.is_anonymous %}
                 <p><a href="{% url 'accounts:login' %}">Login</a></p>
             {% else %}
-                <p><a href="{% url 'accounts:logout' %}">Logout - {{ request.user.get_username }}</a></p>
+                <p>Logged in as {{ request.user.get_username }}. <a href="{% url 'accounts:logout' %}">Logout</a></p>
             {% endif %}
         </div>
     {% endblock user_info %}

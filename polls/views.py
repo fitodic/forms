@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import formset_factory
 from django.http import HttpResponseRedirect
 from django.views.generic import TemplateView
-from django.views.generic import CreateView, FormView
+from django.views.generic import CreateView, FormView, ListView
 
 from .forms import InitialForm, QuestionForm, ChoiceForm
 from .models import Choice, Question
@@ -13,6 +13,12 @@ from .models import Choice, Question
 
 class IndexView(LoginRequiredMixin, TemplateView):
     template_name = "polls/index.html"
+
+
+class QuestionListView(LoginRequiredMixin, ListView):
+    model = Question
+    template_name = "polls/list_polls.html"
+    context_object_name = 'questions'
 
 
 class InitializeView(LoginRequiredMixin, FormView):
@@ -31,6 +37,7 @@ class InitializeView(LoginRequiredMixin, FormView):
 class CreatePollView(LoginRequiredMixin, CreateView):
     template_name = 'polls/create_poll.html'
     form_class = QuestionForm
+    success_url = '/polls/'
 
     def get(self, request, *args, **kwargs):
         self.object = None

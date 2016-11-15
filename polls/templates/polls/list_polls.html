@@ -1,0 +1,9 @@
+{% extends "master.html" %}
+
+{% block body %}
+    {% for question in questions %}
+        <div>
+            <p>{{ question.question_text }}</p>
+        </div>
+    {% endfor %}
+{% endblock body %}

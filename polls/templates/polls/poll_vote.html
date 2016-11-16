@@ -2,7 +2,13 @@
 
 {% block body %}
     <h1>{{ question }}</h1>
-    <form action="" method="post">
+    {% if error_message %}
+        <h3>{{ error_message }}</h3>
+    {% endif %}
+    {% if chosen_answer %}
+        <h3>You have chosen: {{ chosen_answer }}</h3>
+    {% endif %}
+    <form action="{% url 'polls:vote' question.id %}" method="post">
         {% csrf_token %}
         {% for choice in question.choice_set.all %}
             <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />

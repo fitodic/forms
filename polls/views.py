@@ -4,8 +4,12 @@ from __future__ import unicode_literals
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import formset_factory
 from django.http import HttpResponseRedirect
+from django.shortcuts import render
 from django.views.generic import TemplateView
-from django.views.generic import CreateView, DetailView, FormView, ListView
+from django.views.generic import (CreateView,
+                                  FormView,
+                                  ListView,
+                                  UpdateView)
 
 from .forms import InitialForm, QuestionForm, ChoiceForm
 from .models import Choice, Question
@@ -21,10 +25,48 @@ class QuestionListView(LoginRequiredMixin, ListView):
     context_object_name = 'questions'
 
 
-class QuestionDetailView(LoginRequiredMixin, DetailView):
+class VoteView(LoginRequiredMixin, UpdateView):
     model = Question
-    template_name = "polls/poll_detail.html"
+    template_name = "polls/poll_vote.html"
     context_object_name = 'question'
+    fields = ['question_text']
+
+    def post(self, request, *args, **kwargs):
+        choice_id = request.POST.get('choice', None)
+        if choice_id:
+            try:
+                choice = Choice.objects.get(id=choice_id)
+            except Choice.DoesNotExist:
+                return self.form_invalid()
+            question_id = kwargs.get('pk', None)
+            if question_id and choice.question_id == int(question_id):
+                return self.form_valid(choice=choice)
+        else:
+            return self.form_invalid()
+
+    def form_valid(self, choice):
+        choice.voters.add(self.request.user)
+        choice.save()
+
+        return render(
+            self.request,
+            self.template_name,
+            {
+                'question': choice.question,
+                'chosen_answer': choice
+            })
+
+    def form_invalid(self):
+        question_id = self.kwargs.get('pk')
+        question = Question.objects.get(pk=question_id)
+
+        return render(
+            self.request,
+            self.template_name,
+            {
+                'question': question,
+                'error_message': 'Please select an answer.'
+            })
 
 
 class InitializeView(LoginRequiredMixin, FormView):

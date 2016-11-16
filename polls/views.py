@@ -25,6 +25,13 @@ class QuestionListView(LoginRequiredMixin, ListView):
     context_object_name = 'questions'
 
 
+class QuestionUpdateView(LoginRequiredMixin, UpdateView):
+    model = Question
+    template_name = "polls/edit_question.html"
+    form_class = QuestionForm
+    success_url = '/polls/'
+
+
 class VoteView(LoginRequiredMixin, UpdateView):
     model = Question
     template_name = "polls/poll_vote.html"

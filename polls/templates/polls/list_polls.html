@@ -3,7 +3,11 @@
 {% block body %}
     {% for question in questions %}
         <div>
-            <a href=" {% url "polls:vote" question.id %}">{{ question.question_text }}</a>
+            <a href="{% url "polls:vote" question.id %}">{{ question.question_text }}</a>
+
+            {% if request.user == question.author %}
+                <a href="{% url "polls:edit" question.id %}">Edit</a>
+            {% endif %}
         </div>
     {% endfor %}
 {% endblock body %}

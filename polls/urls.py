@@ -8,7 +8,8 @@ from .views import (CreatePollView,
                     InitializeView,
                     VoteView,
                     QuestionListView,
-                    QuestionUpdateView)
+                    QuestionUpdateView,
+                    QuestionStats)
 
 urlpatterns = [
     url(r'^$', IndexView.as_view(), name='index'),
@@ -17,6 +18,8 @@ urlpatterns = [
         name='vote'),
     url(r'^polls/(?P<pk>[0-9]+)/edit/$', QuestionUpdateView.as_view(),
         name='edit'),
+    url(r'^polls/(?P<pk>[0-9]+)/stats/$', QuestionStats.as_view(),
+        name='stats'),
     url(r'^polls/initialize/$', InitializeView.as_view(), name='initialize'),
     url(r'^polls/create/(?P<choices>[1-9]{1})/$', CreatePollView.as_view(),
         name='create'),

@@ -1,0 +1,22 @@
+{% extends "master.html" %}
+
+{% block body %}
+    <h1>Voters</h1>
+    <h2>Question: {{ question }}</h2>
+    <div>
+        <ol>
+            {% for choice in question.choice_set.all %}
+                <li>Choice: {{ choice.choice_text }}</li>
+                <ul>
+                {% if choice.voters.exists %}
+                    {% for voter in choice.voters.all %}
+                        <li>{{ voter.get_username }}</li>
+                    {% endfor %}
+                {% else %}
+                    <li>Nobody</li>
+                {% endif %}
+                </ul>
+            {% endfor %}
+        </ol>
+    </div>
+{% endblock body %}

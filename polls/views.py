@@ -8,6 +8,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.views.generic import (CreateView,
+                                  DetailView,
                                   FormView,
                                   ListView,
                                   UpdateView)
@@ -31,6 +32,11 @@ class QuestionUpdateView(LoginRequiredMixin, UpdateView):
     template_name = "polls/edit_question.html"
     form_class = QuestionForm
     success_url = reverse_lazy('polls:polls')
+
+
+class QuestionStats(LoginRequiredMixin, DetailView):
+    model = Question
+    template_name = "polls/question_stats.html"
 
 
 class VoteView(LoginRequiredMixin, UpdateView):

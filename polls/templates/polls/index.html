@@ -6,9 +6,10 @@
             <h1>What would you like to do?</h1>
         </div>
         <div>
-            <li>
-                <ul><a href="{% url 'polls:initialize' %}">Start a new poll</a></ul>
-            </li>
+            <ul>
+                <li><a href="{% url "polls:initialize" %}">Start a new poll</a></li>
+                <li><a href="{% url "polls:polls" %}">View existing polls</a></li>
+            </ul>
         </div>
     </div>
 {% endblock body %}

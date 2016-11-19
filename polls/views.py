@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import formset_factory
 from django.http import HttpResponseRedirect
@@ -29,7 +30,7 @@ class QuestionUpdateView(LoginRequiredMixin, UpdateView):
     model = Question
     template_name = "polls/edit_question.html"
     form_class = QuestionForm
-    success_url = '/polls/'
+    success_url = reverse_lazy('polls:polls')
 
 
 class VoteView(LoginRequiredMixin, UpdateView):
@@ -92,7 +93,7 @@ class InitializeView(LoginRequiredMixin, FormView):
 class CreatePollView(LoginRequiredMixin, CreateView):
     template_name = 'polls/create_poll.html'
     form_class = QuestionForm
-    success_url = '/polls/'
+    success_url = reverse_lazy('polls:polls')
 
     def get(self, request, *args, **kwargs):
         self.object = None

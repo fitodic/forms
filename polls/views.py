@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.urls import reverse_lazy
+from django.urls import reverse, reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import formset_factory
 from django.http import HttpResponseRedirect
@@ -91,7 +91,7 @@ class InitializeView(LoginRequiredMixin, FormView):
         form_kwargs = self.get_form_kwargs()
         form_data = form_kwargs.get('data')
         number_of_choices = form_data.get('number_of_choices', 1)
-        url = '/polls/create/{}/'.format(number_of_choices)
+        url = reverse('polls:create', kwargs={'choices': number_of_choices})
 
         return url
 

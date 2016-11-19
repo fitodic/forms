@@ -18,6 +18,10 @@
         </div>
     {% endblock user_info %}
 
+    {% block navigation %}
+        <p><a href=" {% url "polls:index" %} ">Home</a></p>
+    {% endblock navigation %}
+
     {% block body %}
 
     {% endblock body %}

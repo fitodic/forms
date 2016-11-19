@@ -8,6 +8,7 @@
             {% if request.user == question.author %}
                 <a href="{% url "polls:edit" question.id %}">Edit</a>
             {% endif %}
+            <a href="{% url "polls:stats" question.id %}">Stats</a>
         </div>
     {% endfor %}
 {% endblock body %}

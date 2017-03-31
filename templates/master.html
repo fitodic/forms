@@ -1,3 +1,5 @@
+{% load counters_tags %}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,6 +19,10 @@
             {% endif %}
         </div>
     {% endblock user_info %}
+
+    {% block page_count %}
+        <p>Number of page views: {% get_page_count %}</p>
+    {% endblock %}
 
     {% block navigation %}
         <p><a href=" {% url "polls:index" %} ">Home</a></p>

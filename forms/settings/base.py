@@ -131,3 +131,10 @@ STATICFILES_DIRS = [
 
 LOGIN_URL = reverse_lazy('accounts:login')
 LOGIN_REDIRECT_URL = reverse_lazy('polls:index')
+
+USE_REDIS = False
+REDIS_CONNECTION = {
+    'host': 'localhost',
+    'port': '6379',
+    'db': '1',
+}

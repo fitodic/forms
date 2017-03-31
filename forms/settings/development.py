@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from .base import *
 
 DEBUG = True
+USE_REDIS = True
 
 DATABASES = {
     'default': {

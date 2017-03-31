@@ -1,19 +1,15 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.urls import reverse, reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import formset_factory
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django.views.generic import TemplateView
-from django.views.generic import (CreateView,
-                                  DetailView,
-                                  FormView,
-                                  ListView,
-                                  UpdateView)
+from django.urls import reverse, reverse_lazy
+from django.views.generic import (CreateView, DetailView, FormView, ListView,
+                                  TemplateView, UpdateView)
 
-from .forms import InitialForm, QuestionForm, ChoiceForm
+from .forms import ChoiceForm, InitialForm, QuestionForm
 from .models import Choice, Question
 
 
